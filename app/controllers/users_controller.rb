@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
    before_action :ensure_current_user,{only:[:edit,:update]}
+ def ensure_current_user
+    @user = User.find(params[:id])
+    if @user.id != current_user.id
+      redirect_to user_path(current_user.id)
+    end
+ end
 
 
   
