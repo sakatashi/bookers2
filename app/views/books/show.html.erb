@@ -6,11 +6,19 @@
       <table class='table'>
   		  <tr>
           <td>
-            <%= link_to user_path(@user.id) do %>
-              <%= image_tag @user.profile_image, size: '60x60' if @user.profile_image.attached? %>
-              <%= @user.name %>
+           <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image, size: '80x80' %>
+    <% else %>
+      <%= image_tag 'no_image.jpg' %>
             <% end %>
           </td>
+          <br>
+          <td>
+            <%= link_to user_path(@user.id) do %>
+              <%= image_tag @user.profile_image, size: '80x80' if @user.profile_image.attached? %>
+              <%= @user.name %>
+              </td>
+              <% end %>
           <td><%= link_to @book.title, book_path(@book.id) %></td>
           <td><%= @book.body %></td>
           <% if @book.user_id == current_user.id %>

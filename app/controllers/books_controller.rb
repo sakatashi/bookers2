@@ -20,8 +20,13 @@ end
   if @book.save
   flash[:notice] ="You have created book successfully."
  redirect_to book_path(@book.id)
+  else
+  @books =Book.all
+  @user = current_user
+  render :index
   end
  end
+
 
 def show
  @book = Book.find(params[:id])
@@ -30,8 +35,9 @@ def show
 end
 
 def edit
- if current_user
  @book = Book.find(params[:id])
+ if @book.user!= current_user
+  redirect_to books_path
  end
 end
 
