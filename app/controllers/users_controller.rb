@@ -8,7 +8,7 @@ class UsersController < ApplicationController
  end
 
 
-  
+
   def index
     @users = User.all
     @book = Book.new
@@ -36,8 +36,8 @@ class UsersController < ApplicationController
      render :edit
     end
   end
- 
- 
+
+
      private
  def user_params
   params.require(:user).permit(:name,:introduction,:profile_image)
