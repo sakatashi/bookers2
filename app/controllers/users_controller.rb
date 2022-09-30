@@ -1,16 +1,20 @@
 class UsersController < ApplicationController
    before_action :ensure_current_user,{only:[:edit,:update]}
+      before_action :search
  def ensure_current_user
     @user = User.find(params[:id])
     if @user.id != current_user.id
       redirect_to user_path(current_user.id)
     end
  end
-
-
+  def search
+    # params[:q]のqには検索フォームに入力した値が入る
+    @q = User.ransack(params[:q])
+  end
 
   def index
     @users = User.all
+    @users = @q.result(distinct: true)
     @book = Book.new
     @user = current_user
   end
